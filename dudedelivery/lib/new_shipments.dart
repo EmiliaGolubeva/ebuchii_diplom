@@ -183,7 +183,7 @@ class _NewShipmentsState extends State<NewShipments> {
                       },
                       child: const Text(
                         'Сохранить',
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 16),
                       ),
                     ),
                   ],

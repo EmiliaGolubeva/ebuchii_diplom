@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dudedelivery">
-   <application
+   <application>
+    <meta-data android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyA3LAfwP4OfPVeWM0va7X2Vqp7i41K9Y6U"/>
         android:label="dudedelivery"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

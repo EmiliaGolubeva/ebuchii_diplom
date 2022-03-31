@@ -1,4 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'constants.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key key}) : super(key: key);
@@ -12,98 +16,154 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.only(left: 30),
+        child: Column(
           children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Row(
+                      children: const [
+                        Icon(
+                          Icons.arrow_back,
+                          size: 30,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage('assets/images/avatar.png'),
+                  ),
+                ),
+                const SizedBox(
+                  width: 50,
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 18,
+            ),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 10.0),
+              child: Text(
+                "Ibragym Alibekov",
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ),
             const Text(
-              "Dude Delivery",
+              "pussydone@gmail.com",
               style: TextStyle(
-                fontSize: 35,
-                fontWeight: FontWeight.bold,
+                fontSize: 16,
               ),
             ),
             const SizedBox(
-              height: 30,
+              height: 45,
             ),
-            Column(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/');
-                  },
-                  child: Row(
-                    children: const [
-                      Icon(
-                        Icons.account_circle_outlined,
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/editprofile');
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Container(
+                  height: 60,
+                  decoration: BoxDecoration(
+                      color: Colors.grey[850],
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Row(children: const [
+                    Padding(
+                      padding: EdgeInsets.only(left: 10.0),
+                      child: Icon(
+                        CupertinoIcons.person_alt_circle,
+                        color: Colors.white,
                         size: 30,
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 15.0),
-                        child: Text(
-                          "Профиль",
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Text(
+                      "Настройки профиля",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                        fontFamily: 'SourceSansPro',
                       ),
-                    ],
+                    )
+                  ]),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Container(
+                height: 60,
+                decoration: BoxDecoration(
+                    color: Colors.grey[850],
+                    borderRadius: BorderRadius.circular(10)),
+                child: Row(children: const [
+                  Padding(
+                    padding: EdgeInsets.only(left: 10.0),
+                    child: Icon(
+                      CupertinoIcons.link_circle,
+                      color: Colors.white,
+                      size: 30,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/');
-                  },
-                  child: Row(
-                    children: const [
-                      Icon(
-                        Icons.settings,
-                        size: 30,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 15.0),
-                        child: Text(
-                          "Настройки",
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      ),
-                    ],
+                  SizedBox(
+                    width: 15,
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/');
-                  },
-                  child: Row(
-                    children: const [
-                      Icon(
-                        Icons.app_settings_alt_outlined,
-                        size: 30,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 15.0),
-                        child: Text(
-                          "О приложении",
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      ),
-                    ],
+                  Text(
+                    "Партнерская программа",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                  )
+                ]),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Container(
+                height: 60,
+                decoration: BoxDecoration(
+                    color: Colors.grey[850],
+                    borderRadius: BorderRadius.circular(10)),
+                child: Row(children: const [
+                  Padding(
+                    padding: EdgeInsets.only(left: 10.0),
+                    child: Icon(
+                      CupertinoIcons.question_circle,
+                      color: Colors.white,
+                      size: 30,
+                    ),
                   ),
-                ),
-              ],
-            )
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Text(
+                    "О приложении",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                  )
+                ]),
+              ),
+            ),
           ],
         ),
       ),
