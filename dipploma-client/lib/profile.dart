@@ -50,14 +50,12 @@ class _ProfileState extends State<Profile> {
                 )
               ],
             ),
-
-            
-            const Text(
-              "pussydone@gmail.com",
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
+            // const Text(
+            //   "pussydone@gmail.com",
+            //   style: TextStyle(
+            //     fontSize: 16,
+            //   ),
+            // ),
             const SizedBox(
               height: 45,
             ),

@@ -9,7 +9,9 @@ import 'package:dudedelivery/profile.dart';
 import 'package:dudedelivery/reg.dart';
 import 'package:dudedelivery/shipments.dart';
 import 'package:dudedelivery/test.dart';
+import 'package:dudedelivery/yandex_maps.dart';
 import 'package:flutter/material.dart';
+import 'clients.dart';
 import 'new_shipments.dart';
 
 void main() {
@@ -38,7 +40,8 @@ class _MyAppState extends State<MyApp> {
         '/editprofile': (context) => const EditProfile(),
         '/about': (context) => const AboutPage(),
         '/shipments': (context) => const Shipments(),
-        // '/test': (context) => const Clients(),
+        '/yandex': (context) =>  YandexMaps(),
+        '/test': (context) => const Clients(),
       },
     );
   }

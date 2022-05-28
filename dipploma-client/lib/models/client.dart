@@ -1,21 +1,28 @@
-class ClientsList{
-  static final clients = [
-    Client(
-      clientId: 1,
-      clientName: "Митя Фомин",
-      clientPhone: "+8 (800) 555-35-35",
-      clientAddress: "Песочная набережная дом 14",
-      clientOrganization: "1000-7",
-    )
-  ];
-}
+import 'dart:developer';
 
 class Client {
-  final int clientId;
-  final String clientName;
-  final String clientPhone;
-  final String clientAddress;
-  final String clientOrganization;
+  final int id;
+  final int firstName;
+  final String lastName;
+  final String phone;
+  final String organisation;
 
-  Client({required this.clientId,required this.clientName, required this.clientPhone, required this.clientAddress, required this.clientOrganization});
+
+  const Client({
+    required this.id,
+    required this.firstName,
+    required this.lastName,
+    required this.phone,
+    required this.organisation,
+  });
+
+  factory Client.fromJson(Map<String, dynamic> json) {
+    return Client(
+      id: json['id'],
+      firstName: json['firstName'],
+      lastName: json['lastName'],
+      phone: json['phone'],
+      organisation: json['organisation'],
+    );
+  }
 }

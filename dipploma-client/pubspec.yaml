@@ -46,7 +46,12 @@ dependencies:
   url_launcher: 6.0.20
   webview_flutter: ^3.0.1
   http: 0.13.4
-  
+  yandex_mapkit: ^2.0.5
+  flutter_phone_direct_caller: ^2.1.1
+  shared_preferences: ^2.0.15
+  dropdownfield: ^0.0.2
+
+
 
 dev_dependencies:
   flutter_test:

@@ -117,7 +117,7 @@ class _BottomScreenState extends State<BottomScreen> {
                   labelText: 'Построить маршрут',
                   imageName: '1.png',
                   buttontap: () {
-                    Navigator.pushNamed(context, '/map');
+                    Navigator.pushNamed(context, '/yandex');
                   },
                 ),
               ],

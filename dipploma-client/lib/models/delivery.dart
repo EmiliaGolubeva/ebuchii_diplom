@@ -1,5 +1,8 @@
+import 'dart:convert';
 
-import 'dart:developer';
+Delivery deliveryFromJson(String str) => Delivery.fromJson(json.decode(str));
+
+String deliveryToJson(Delivery data) => json.encode(data.toJson());
 
 class Delivery {
   final int id;
@@ -46,4 +49,18 @@ class Delivery {
       time: json['time'],
     );
   }
+    Map<String, dynamic> toJson() => {
+      "date": date,
+      "time": time,
+      "address": address,
+      "phone": phone,
+      "clientName": clientName,
+      "amountOfSpaces": amountOfSpaces,
+      "organisation": organisation,
+      "status": status,
+      "type": type,
+      "weight": weight,
+      "marks": marks
+  };
+
 }
