@@ -1,28 +1,39 @@
 import 'dart:developer';
 
 class Client {
-  final int id;
-  final int firstName;
-  final String lastName;
-  final String phone;
-  final String organisation;
+  int? id;
+  String? firstName;
+  String? lastName;
+  String? phone;
+  String? organisation;
+  String? address;
 
 
-  const Client({
-    required this.id,
-    required this.firstName,
-    required this.lastName,
-    required this.phone,
-    required this.organisation,
+   Client({
+     this.id,
+     this.firstName,
+     this.lastName,
+     this.phone,
+     this.organisation,
+     this.address
   });
 
-  factory Client.fromJson(Map<String, dynamic> json) {
-    return Client(
-      id: json['id'],
-      firstName: json['firstName'],
-      lastName: json['lastName'],
-      phone: json['phone'],
-      organisation: json['organisation'],
-    );
+   Client.fromJson(Map<String, dynamic> json) {
+      id = json['id'];
+      firstName = json['firstName'];
+      lastName = json['lastName'];
+      phone = json['phone'];
+      organisation = json['organisation'];
+      address = json['address'];
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['firstName'] = this.firstName;
+    data['lastName'] = this.lastName;
+    data['phone'] = this.phone;
+    data['organisation'] = this.organisation;
+    data['address'] = this.address;
+    return data;
   }
 }

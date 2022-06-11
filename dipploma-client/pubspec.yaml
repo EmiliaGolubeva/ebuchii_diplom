@@ -50,6 +50,7 @@ dependencies:
   flutter_phone_direct_caller: ^2.1.1
   shared_preferences: ^2.0.15
   dropdownfield: ^0.0.2
+  hexcolor: ^2.0.7
 
 
 

@@ -38,10 +38,9 @@ class _AboutPageState extends State<AboutPage> {
                   ),
                 ),
                 const Padding(
-                  padding:
-                  EdgeInsets.only(top: 12.0, right: 20, left: 48, bottom: 10),
+                  padding: EdgeInsets.only(top: 12.0, left: 26, bottom: 10),
                   child: Text(
-                    "Dude Delivery",
+                    "Курьер Сервис Экспресс",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 23,
@@ -58,10 +57,10 @@ class _AboutPageState extends State<AboutPage> {
               height: 18,
             ),
             const SizedBox(
-              width: 110,
-              height: 110,
+              width: 150,
+              height: 150,
               child: Image(
-                image: AssetImage('assets/images/Logo.png'),
+                image: AssetImage('assets/images/logoa.png'),
               ),
             ),
             const SizedBox(
@@ -72,9 +71,7 @@ class _AboutPageState extends State<AboutPage> {
               child: Container(
                 height: 400,
                 width: 700,
-                decoration: BoxDecoration(
-                    color: Colors.grey[850],
-                    borderRadius: BorderRadius.circular(15)),
+                decoration: BoxDecoration(color: Colors.grey[850], borderRadius: BorderRadius.circular(15)),
                 child: Column(
                   children: [
                     const SizedBox(
@@ -105,7 +102,7 @@ class _AboutPageState extends State<AboutPage> {
                     Container(
                       margin: const EdgeInsets.only(bottom: 300),
                       child: const Text(
-                        "От 21 апреля 2022",
+                        "От 2 июня 2022",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 12,
@@ -123,24 +120,24 @@ class _AboutPageState extends State<AboutPage> {
                     ),
                   ],
                 ),
-                  // height: 400,
-                  // decoration: BoxDecoration(
-                  //     color: Colors.grey[850],
-                  //     borderRadius: BorderRadius.circular(15)),
-                  // child: Column(
-                  //   children: const [
-                  //     Padding(
-                  //       padding: EdgeInsets.only(
-                  //           top: 16.0, right: 20, left: 20, bottom: 10),
-                  //       child: Text("Приложение сделано студентами из группы Y2438",
-                  //         style: TextStyle(
-                  //           fontSize: 16,
-                  //           color: Colors.white,
-                  //         ),
-                  //       ),
-                  //     )
-                  //   ],
-                  // )
+                // height: 400,
+                // decoration: BoxDecoration(
+                //     color: Colors.grey[850],
+                //     borderRadius: BorderRadius.circular(15)),
+                // child: Column(
+                //   children: const [
+                //     Padding(
+                //       padding: EdgeInsets.only(
+                //           top: 16.0, right: 20, left: 20, bottom: 10),
+                //       child: Text("Приложение сделано студентами из группы Y2438",
+                //         style: TextStyle(
+                //           fontSize: 16,
+                //           color: Colors.white,
+                //         ),
+                //       ),
+                //     )
+                //   ],
+                // )
               ),
             ),
           ],

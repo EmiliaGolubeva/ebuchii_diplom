@@ -60,11 +60,12 @@ class _EditProfileState extends State<EditProfile> {
               padding: const EdgeInsets.only(
                   top: 12.0, right: 20, left: 20, bottom: 12),
               child: TextField(
+                keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  labelText: 'Введите новое имя пользователя',
+                  labelText: 'Введите новый номер телефона',
                 ),
               ),
             ),
@@ -72,6 +73,7 @@ class _EditProfileState extends State<EditProfile> {
               padding: const EdgeInsets.only(
                   top: 12.0, right: 20, left: 20, bottom: 12),
               child: TextField(
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),

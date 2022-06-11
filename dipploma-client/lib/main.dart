@@ -1,5 +1,6 @@
 import 'package:dudedelivery/about.dart';
 import 'package:dudedelivery/auth.dart';
+import 'package:dudedelivery/clientstest.dart';
 import 'package:dudedelivery/edit_profile.dart';
 import 'package:dudedelivery/home_screen.dart';
 import 'package:dudedelivery/map.dart';
@@ -41,7 +42,7 @@ class _MyAppState extends State<MyApp> {
         '/about': (context) => const AboutPage(),
         '/shipments': (context) => const Shipments(),
         '/yandex': (context) =>  YandexMaps(),
-        '/test': (context) => const Clients(),
+        '/test': (context) => Clients(),
       },
     );
   }

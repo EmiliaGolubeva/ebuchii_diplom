@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dudedelivery/models/delivery.dart';
@@ -14,19 +15,23 @@ class NewShipments extends StatefulWidget {
   _NewShipmentsState createState() => _NewShipmentsState();
 }
 
-Future<Delivery?> createDelivery(String clientName, String organisation, String address, double weight,
-int amountOfSpaces, String marks, String date) async{
-  Uri uri = Uri.parse('http://25.33.48.59:8083/delivery/');
+Future<Delivery?> createDelivery(String date, String time, String address, String phone, String clientName, int amountOfSpaces, String organisation,
+String status, String type, double weight, String marks) async{
+  Uri uri = Uri.parse('http://25.33.48.59:8083/deliveries');
 
-  final response = await http.post(uri, body: {
+  final response = await http.post(uri, body: jsonEncode({
     "date": date,
+    "time": time,
     "address": address,
+    "phone": phone,
     "clientName": clientName,
-    "amountOfSpaces": amountOfSpaces,
+    "amountOfSpaces": amountOfSpaces.toString(),
     "organisation": organisation,
-    "weight": weight,
+    "status": status,
+    "type": type,
+    "weight": weight.toString(),
     "marks": marks
-  });
+  }), headers: {'Content-Type': 'application/json'});
 
   log('${response.body}', name: 'createDelivery body');
   log('${response.statusCode}', name: 'createDelivery status');
@@ -43,23 +48,23 @@ int amountOfSpaces, String marks, String date) async{
 
 class _NewShipmentsState extends State<NewShipments> {
 
-  late Delivery _delivery;
-
-  final TextEditingController dateController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
   final TextEditingController timeController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
-  final TextEditingController clientNameController = TextEditingController();
+  TextEditingController clientNameController = TextEditingController();
   final TextEditingController amountOfSpaceController = TextEditingController();
   final TextEditingController organizationController = TextEditingController();
   final TextEditingController statusController = TextEditingController();
-  final TextEditingController typeController = TextEditingController();
+  TextEditingController typeController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
   final TextEditingController marksController = TextEditingController();
 
   DateTime _dateTime = DateTime.now();
-  List<String> items = [ 'ФИО получателя','i1', 'i2', 'i3'];
-  String? selectedItem = 'ФИО получателя';
+  // List<String> items = [ 'ФИО получателя','i1', 'i2', 'i3'];
+  final clients = ['Данте из ДМЦ', 'Морган Ю', 'Ярл Баргулф Старший', 'Перекресток, Иванов Иван Иванович'];
+  final types = ['Забор груза', 'Доставка', 'Доставка с частичным выкупом'];
+  // String? selectedValue = 'ФИО получателя';
 
   @override
   Widget build(BuildContext context) {
@@ -106,39 +111,85 @@ class _NewShipmentsState extends State<NewShipments> {
                             color: Colors.grey,
                           ),
                         ),
-                        child: DropdownButton<String>
-                          (
-                          value: selectedItem,
-                          elevation: 2,
-                          isExpanded: true,
-                          items: items
-                              .map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(item, style: TextStyle(fontSize: 15)),
-                          ))
-                              .toList(),
-                          onChanged: (item) => setState(() => selectedItem = item),
+                        child: TextField(
+                          controller: clientNameController,
+                          decoration: InputDecoration(
+                            labelText: "Клиент",
+                            suffixIcon: PopupMenuButton<String>(
+                              icon: const Icon(Icons.arrow_drop_down),
+                              onSelected: (String value) {
+                                clientNameController.text = value;
+                              },
+                              itemBuilder: (BuildContext context) {
+                                return clients
+                                    .map<PopupMenuItem<String>>((String value) {
+                                  return PopupMenuItem(
+                                      child: Text(value), value: value);
+                                }).toList();
+                              },
+                            ),
+                          ),
                         ),
                       ),
-
-
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          right: 20, left: 20, bottom: 12),
+                      child: TextField(
+                        keyboardType: TextInputType.datetime,
+                        controller: dateController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          labelText: 'Дата доставки',
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          right: 20, left: 20, bottom: 12),
+                      child: TextField(
+                        controller: timeController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          labelText: 'Временной промежуток',
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          right: 20, left: 20, bottom: 12),
+                      child: TextField(
+                        keyboardType: TextInputType.streetAddress,
+                        controller: addressController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          labelText: 'Адрес доставки',
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          right: 20, left: 20, bottom: 12),
+                      child: TextField(
+                        keyboardType: TextInputType.number,
+                        controller: amountOfSpaceController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          labelText: 'Количество',
+                        ),
+                      ),
                     ),
                       Padding(
                         padding: const EdgeInsets.only(
                             right: 20, left: 20, bottom: 12),
-                        child: TextField(
-                          controller: clientNameController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            labelText: 'ФИО получателя',
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: 12.0, right: 20, left: 20, bottom: 12),
                         child: TextField(
                           controller: organizationController,
                           decoration: InputDecoration(
@@ -149,23 +200,45 @@ class _NewShipmentsState extends State<NewShipments> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: 12.0, right: 20, left: 20, bottom: 12),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          right: 20, left: 20, bottom: 12),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(15),
+                          ),
+                          border: Border.all(
+                            color: Colors.grey,
+                          ),
+                        ),
                         child: TextField(
-                          controller: addressController,
+                          controller: typeController,
                           decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
+                            labelText: "Тип доставки",
+                            suffixIcon: PopupMenuButton<String>(
+                              icon: const Icon(Icons.arrow_drop_down),
+                              onSelected: (String value) {
+                                typeController.text = value;
+                              },
+                              itemBuilder: (BuildContext context) {
+                                return types
+                                    .map<PopupMenuItem<String>>((String value) {
+                                  return PopupMenuItem(
+                                      child: Text(value), value: value);
+                                }).toList();
+                              },
                             ),
-                            labelText: 'Адрес доставки',
                           ),
                         ),
                       ),
+                    ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            top: 12.0, right: 20, left: 20, bottom: 12),
+                            right: 20, left: 20, bottom: 12),
                         child: TextField(
+                          keyboardType: TextInputType.datetime,
                           controller: weightController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -177,56 +250,43 @@ class _NewShipmentsState extends State<NewShipments> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            top: 12.0, right: 20, left: 20, bottom: 12),
-                        child: TextField(
-                          controller: amountOfSpaceController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            labelText: 'Количество',
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: 12.0, right: 20, left: 20, bottom: 12),
+                           right: 20, left: 20, bottom: 12),
                         child: TextField(
                           controller: marksController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            labelText: 'Детали доставки',
+                            labelText: 'Детали доставки *',
                           ),
                         ),
                       ),
 
                       Column(
                         children: [
-                          const Padding(
-                          padding: EdgeInsets.only(bottom: 10.0, right: 140),
-                          child: Text("Выберите время доставки"),
-                        ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 18, left: 15, right: 15),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: const Color.fromARGB(255, 209, 209, 209),
-                              ),
-                              child: TimePickerSpinner(
-                                spacing: 30,
-                                minutesInterval: 10,
-                                onTimeChange: (time) {
-                                  setState(() {
-                                    _dateTime = time;
-                                  });
-                                },
-                              ),
-                            ),
-                          ),
+                        //   const Padding(
+                        //   padding: EdgeInsets.only(bottom: 10.0, right: 140),
+                        //   child: Text("Выберите время доставки"),
+                        // ),
+                        //   Padding(
+                        //     padding: const EdgeInsets.only(
+                        //         bottom: 18, left: 15, right: 15),
+                        //     child: Container(
+                        //       decoration: BoxDecoration(
+                        //         borderRadius: BorderRadius.circular(20),
+                        //         color: const Color.fromARGB(255, 209, 209, 209),
+                        //       ),
+                        //       child: TimePickerSpinner(
+                        //         spacing: 30,
+                        //         minutesInterval: 10,
+                        //         onTimeChange: (time) {
+                        //           setState(() {
+                        //             _dateTime = time;
+                        //           });
+                        //         },
+                        //       ),
+                        //     ),
+                        //   ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               primary: Colors.grey[850],
@@ -237,16 +297,54 @@ class _NewShipmentsState extends State<NewShipments> {
                               ),
                             ),
                             onPressed: () async {
-                              final String clientName = clientNameController.text;
-                              final String organisation = organizationController.text;
-                              final String address = addressController.text;
-                              final double weight = double.parse(weightController.text);
-                              final int amountOfSpaces = int.parse(amountOfSpaceController.text);
-                              final String marks = marksController.text;
-                              final String date = dateController.text;
-                              
-                              final Delivery? delivery = await createDelivery(clientName, organisation, address, weight, amountOfSpaces, marks, date);
-                              },
+                              if (clientNameController.text.isEmpty || dateController.text.isEmpty || timeController.text.isEmpty || addressController.text.isEmpty
+                              || amountOfSpaceController.text.isEmpty || organizationController.text.isEmpty || typeController.text.isEmpty || weightController.text.isEmpty) {
+                                showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) => AlertDialog(
+                                    title: const Text(
+                                      'Внимание',
+                                    ),
+                                    content: const Text(
+                                      'Необходимо заполнить обязательные поля',
+                                    ),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () => Navigator.of(context).pop(),
+                                        child: const Center(
+                                          child: Text('OK'),
+                                      ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                                return;
+                              } else {
+                                final String date = dateController.text;
+                                final String time = timeController.text;
+                                final String address = addressController.text;
+                                final String phone = phoneController.text;
+                                String clientName = clientNameController.text;
+                                int amountOfSpaces = int.parse(amountOfSpaceController.text);
+                                final String organisation = organizationController.text;
+                                final String status = statusController.text;
+                                final String type = typeController.text;
+                                final double weight = double.parse(weightController.text);
+                                final String marks = marksController.text;
+
+                                final Delivery? delivery = await createDelivery(
+                                    date,
+                                    time,
+                                    address,
+                                    phone,
+                                    clientName,
+                                    amountOfSpaces,
+                                    organisation,
+                                    status,
+                                    type,
+                                    weight,
+                                    marks);
+                              }},
                             child: const Text(
                               'Сохранить',
                               style: TextStyle(fontSize: 15),

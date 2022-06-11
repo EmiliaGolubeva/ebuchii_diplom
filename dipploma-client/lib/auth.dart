@@ -34,6 +34,7 @@ class _AuthState extends State<Auth> {
               padding: const EdgeInsets.only(
                   top: 12.0, right: 20, left: 20, bottom: 12),
               child: TextField(
+                keyboardType: TextInputType.emailAddress,
                 obscureText: false,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -86,17 +87,17 @@ class _AuthState extends State<Auth> {
                 style: TextStyle(fontSize: 15),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, '/reg');
-                },
-                child: const Text(
-                  "Регистрация",
-                ),
-              ),
-            )
+            // Padding(
+            //   padding: const EdgeInsets.only(top: 10.0),
+            //   child: GestureDetector(
+            //     onTap: () {
+            //       Navigator.pushNamed(context, '/reg');
+            //     },
+            //     child: const Text(
+            //       "Регистрация",
+            //     ),
+            //   ),
+            // )
           ],
         ),
       ),
